@@ -1,6 +1,17 @@
+def code
+
 node {
-    def rootDir = pwd()
-    def exampleModule = load "${rootDir}/script/Example.groovy "
-    exampleModule.exampleMethod()
-    exampleModule.otherExampleMethod()
+  stage('Checkout') {
+    checkout scm
+  }
+
+  stage('Load') {
+    code = load 'example.groovy'
+  }
+
+  stage('Execute') {
+    code.exampleMethod()
+  }
 }
+
+code.otherExampleMethod()
